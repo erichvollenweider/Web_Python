@@ -7,4 +7,8 @@ config = rx.Config(
         rx.plugins.SitemapPlugin(),
         rx.plugins.TailwindV4Plugin(),
     ],
+    cors_allowed_origins=[
+        "https://localhost:3000",
+        "https://erichvollenweider-python.vercel.app"
+    ]
 )
