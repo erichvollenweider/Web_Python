@@ -1,4 +1,22 @@
 import reflex as rx
+import httpx
+import json
+
+async def jsonresponse_to_bool(response):
+
+    if hasattr(response, "body"):
+        data = json.loads(response.body.decode())
+        return bool(data.get("live", False))
+    else:
+        return bool(response.get("live", False))
+
+
+async def get_live_status(user: str) -> bool:
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"http://localhost:8000/live/{user}")
+        data = response.json()
+        return data.get("live", False)
+
 
 #COMUN
 def lang() -> rx.Component:
@@ -14,12 +32,6 @@ index_description= "Desarrollador de Software"
 
 
 #CURSOS
-curso_title= "Erich Vollenweider | Cursos"
-curso_description= "Cursos de Python"
+project_title= "Erich Vollenweider | Cursos"
+project_description= "Cursos de Python"
 
-# app.add_page(
-#     index.index,
-#     title= index_title,
-#     description= index_description,
-#     image= image
-# )

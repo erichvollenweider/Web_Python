@@ -5,6 +5,8 @@ class Color(Enum):
     SECUNDARY = "#087ec4"
     BACKGROUND = "#0C151D"
     CONTENT = "#171F26"
+    TWICH = "#9146ff"
+    TWICH_BG = "#a263ff"
 
 class TextColor(Enum):
     HEADER = "#F1F2F4"

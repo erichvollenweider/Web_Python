@@ -6,7 +6,7 @@ import Web_Python.constants as cte
 import Web_Python.styles.colors as color
 
 
-def header(details = True) -> rx.Component:
+def header(details = True, live = False) -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.avatar(
@@ -20,10 +20,12 @@ def header(details = True) -> rx.Component:
                 border="4px solid",
                 border_color=color.Color.PRIMARY.value,
             ),
+
             rx.vstack(
                 rx.heading(
                     "Erich Vollenweider",
-                    size="8"
+                    size="8",
+                    padding_top="4px"
                 ),
                 rx.text(
                     "Analista en Computación",
@@ -35,10 +37,25 @@ def header(details = True) -> rx.Component:
                     icon.link_icon(cte.INSTAGRAM, "instagram"),
                     icon.link_icon(cte.GLOBE, "globe")
                 ),
+                
                 spacing="0",
-                align_items="start",
+                align_items="start"
             ),
-            align_items="center",
+
+            rx.cond(
+                live,
+                rx.flex(
+                    rx.badge(
+                        "Online",
+                        size="3",
+                        color="#ffffff",
+                        color_scheme="purple",
+                        variant="solid",
+                        high_contrast=False
+                    ),
+                    padding_top="10px"
+                )
+            ),
             spacing="4"
         ),
         

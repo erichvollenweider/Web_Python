@@ -6,12 +6,14 @@ import Web_Python.views.header as hd
 import Web_Python.views.index_links as lk
 import Web_Python.views.project as pr
 import Web_Python.styles.styles as styles
+import Web_Python.state.PageState as ps
 
 
 @rx.page(
     title= utils.index_title,
     description= utils.index_description,
-    image= utils.image
+    image= utils.image,
+    on_load=ps.PageState.check_live
 )
 
 
@@ -21,7 +23,7 @@ def index() -> rx.Component:
         nb.navbar(),
         rx.center(
             rx.vstack(
-                hd.header(),
+                hd.header(live=ps.PageState.is_live),
                 lk.index_links(),
                 max_width=styles.MAX_WIDTH,
                 width="100%",

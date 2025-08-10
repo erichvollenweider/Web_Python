@@ -8,7 +8,9 @@ config = rx.Config(
         rx.plugins.TailwindV4Plugin(),
     ],
     cors_allowed_origins=[
-        "https://localhost:3000",
+        "http://localhost:3000",
         "https://erichvollenweider-python.vercel.app"
-    ]
+    ],
+    tailwind=None,
+    show_built_with_reflex=False
 )

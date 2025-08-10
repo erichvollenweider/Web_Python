@@ -7,13 +7,15 @@ import Web_Python.views.header as hd
 import Web_Python.views.projects_links as prs
 import Web_Python.views.project as pr
 import Web_Python.styles.styles as styles
+import Web_Python.state.PageState as ps
 
 
 @rx.page(
     route= rt.Routes.PROYECTOS.value,
-    title= utils.curso_title,
-    description= utils.curso_description,
-    image= utils.image
+    title= utils.project_title,
+    description= utils.project_description,
+    image= utils.image,
+    on_load=ps.PageState.check_live
 )
 
 
@@ -23,7 +25,7 @@ def projects() -> rx.Component:
         nb.navbar(),
         rx.center(
             rx.vstack(
-                hd.header(details=False),
+                hd.header(details=False, live=ps.PageState.is_live),
                 prs.projects_links(),
                 pr.project(),
                 max_width=styles.MAX_WIDTH,
