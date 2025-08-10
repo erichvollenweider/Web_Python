@@ -8,8 +8,8 @@ FROM python:3.13
 
 WORKDIR /app
 
-# Copy local context to `/app` inside container (see .dockerignore)
-COPY . .
+
+COPY requirements.txt .
 
 
 # Create virtualenv which will be copied into final container
@@ -19,5 +19,7 @@ RUN python3.13 -m venv $VIRTUAL_ENV
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
 
 CMD reflex run --env prod --backend-only
