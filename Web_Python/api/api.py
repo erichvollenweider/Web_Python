@@ -1,13 +1,13 @@
-from .TwichAPI import TwichAPI
+from .TwitchAPI import TwitchAPI
 from fastapi.responses import JSONResponse
 from fastapi import Request
 
 
-TWICH_API = TwichAPI()
+TWITCH_API = TwitchAPI()
 
 
 async def live(request: Request):
     user = request.path_params.get("user", "")
-    is_live = TWICH_API.live(user)
-    return JSONResponse({"live": is_live})
+    data = TWITCH_API.live(user)
+    return JSONResponse(content=data)
 

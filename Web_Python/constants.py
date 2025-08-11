@@ -3,6 +3,7 @@ GITHUB = "https://github.com/erichvollenweider"
 LINKEDIN = "https://www.linkedin.com/in/erich-vollenweider/"
 INSTAGRAM = "https://www.instagram.com/erich_vollenweider/"
 GLOBE = "https://erichvollenweider.vercel.app"
+TWITCH = "https://www.twitch.tv/erich_vollenweider"
 
 #PROYECTOS DE GITHUB
 CWAI = "https://github.com/erichvollenweider/CookingWithAI"

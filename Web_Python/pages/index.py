@@ -23,7 +23,11 @@ def index() -> rx.Component:
         nb.navbar(),
         rx.center(
             rx.vstack(
-                hd.header(live=ps.PageState.is_live),
+                hd.header(
+                    details=True,
+                    live=ps.PageState.is_live,
+                    live_title=ps.PageState.is_title
+                ),
                 lk.index_links(),
                 max_width=styles.MAX_WIDTH,
                 width="100%",

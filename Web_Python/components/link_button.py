@@ -23,7 +23,6 @@ def link_button(title: str, url: str, icono: str, is_ext: bool) -> rx.Component:
                 width="100%"
             ),
         ),
-        padding_x= styles.Size.DEFAULT.value,
         href=url,
         is_external=is_ext,
         width="100%"

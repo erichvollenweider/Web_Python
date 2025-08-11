@@ -25,7 +25,11 @@ def projects() -> rx.Component:
         nb.navbar(),
         rx.center(
             rx.vstack(
-                hd.header(details=False, live=ps.PageState.is_live),
+                hd.header(
+                    details=False,
+                    live=ps.PageState.is_live,
+                    live_title=ps.PageState.is_title
+                ),
                 prs.projects_links(),
                 pr.project(),
                 max_width=styles.MAX_WIDTH,

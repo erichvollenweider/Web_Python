@@ -3,16 +3,18 @@ import time
 import dotenv
 import requests
 
-class TwichAPI:
+class TwitchAPI:
 
     dotenv.load_dotenv()
 
-    CLIENT_ID = os.environ.get("TWICH_CLIENT_ID")
-    CLIENT_SECRET = os.environ.get("TWICH_CLIENT_SECRET")
+    CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
+    CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
+
 
     def __init__(self) -> None:
         self.token = None
         self.token_expires = 0
+
 
     def generate_token(self):
 
@@ -33,26 +35,29 @@ class TwichAPI:
             self.token = None
             self.token_expires = 0
     
+
     def token_valid(self) -> bool:
         return time.time() < self.token_expires
     
-    def live(self, user: str) -> bool:
-
+    
+    def live(self, user: str) -> dict:
         if not self.token_valid():
             self.generate_token()
 
-        response = requests.get(
-            f"https://api.twitch.tv/helix/streams?user_login={user}",
-            headers={
-                "Client-ID": self.CLIENT_ID,
-                "Authorization": f"Bearer {self.token}"
-            }
-        )
-
-        if response.status_code == 200 and response.json()["data"]:
-            data = response.json()["data"]
-            print(data)
-            return True
-        data = response.json()["data"]
-        print(data)
-        return False
+        try:
+            response = requests.get(
+                f"https://api.twitch.tv/helix/streams?user_login={user}",
+                headers={
+                    "Client-ID": self.CLIENT_ID,
+                    "Authorization": f"Bearer {self.token}"
+                },
+                timeout=5
+            )
+            if response.status_code == 200:
+                data = response.json().get("data", [])
+                if data:
+                    return {"live": True, "title": data[0].get("title", "")}
+            return {"live": False, "title": ""}
+        except requests.RequestException as e:
+            print(f"Error al conectar con Twitch: {e}")
+            return {"live": False, "title": ""}

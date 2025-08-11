@@ -4,9 +4,10 @@ import Web_Python.components.link_icon as icon
 import Web_Python.components.info_text as it
 import Web_Python.constants as cte
 import Web_Python.styles.colors as color
+import Web_Python.components.link_button as lb
 
 
-def header(details = True, live = False) -> rx.Component:
+def header(details = True, live = False, live_title = "") -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.avatar(
@@ -44,16 +45,22 @@ def header(details = True, live = False) -> rx.Component:
 
             rx.cond(
                 live,
-                rx.flex(
-                    rx.badge(
-                        "Online",
-                        size="3",
-                        color="#ffffff",
-                        color_scheme="purple",
-                        variant="solid",
-                        high_contrast=False
+                rx.link(
+                    rx.flex(
+                        rx.badge(
+                            rx.icon("twitch"),
+                            "Online",
+                            size="3",
+                            color="#ffffff",
+                            color_scheme="purple",
+                            variant="solid",
+                            high_contrast=False,
+                            class_name="blink"
+                        ),
+                        padding_top="10px"
                     ),
-                    padding_top="10px"
+                    href = cte.TWITCH,
+                    is_external=True
                 )
             ),
             spacing="4"
@@ -80,6 +87,18 @@ def header(details = True, live = False) -> rx.Component:
                     width="100%"
                 ),
 
+                rx.flex(
+                    rx.cond(
+                        live,
+                        lb.link_button(
+                            live_title,
+                            cte.TWITCH, 
+                            "twitch",
+                            True
+                        ),
+                    ),
+                    width="100%"
+                ),
                 
                 rx.text(
                     f"""
@@ -93,7 +112,6 @@ def header(details = True, live = False) -> rx.Component:
                 spacing= "6"
             ),
         ),
-        padding_x= styles.Size.DEFAULT.value,
         text_align="justify",
         align_items="start",
         spacing= "6"
