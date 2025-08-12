@@ -18,7 +18,7 @@ class SupabaseAPI:
 
         featured_data = []
 
-        if len(response.data > 0):
+        if len(response.data) > 0:
             for featured_items in response.data:
                 featured_data.append(featured_items)
 
