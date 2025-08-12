@@ -13,7 +13,7 @@ import Web_Python.state.PageState as ps
     title= utils.index_title,
     description= utils.index_description,
     image= utils.image,
-    on_load=ps.PageState.check_live
+    on_load=[ps.PageState.check_live, ps.PageState.featured_links]
 )
 
 
@@ -28,7 +28,7 @@ def index() -> rx.Component:
                     live=ps.PageState.is_live,
                     live_title=ps.PageState.is_title
                 ),
-                lk.index_links(),
+                lk.index_links(ps.PageState.featured_links),
                 max_width=styles.MAX_WIDTH,
                 width="100%",
                 spacing="4",

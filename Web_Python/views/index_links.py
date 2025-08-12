@@ -4,7 +4,7 @@ import Web_Python.components.title as tt
 import Web_Python.constants as cte
 import Web_Python.routes as rt
 
-def index_links() -> rx.Component:
+def index_links(featured = []) -> rx.Component:
     return rx.vstack(
         tt.title("Redes Sociales"),
         lb.link_button("Github", cte.GITHUB, "github", True),
@@ -13,5 +13,26 @@ def index_links() -> rx.Component:
         lb.link_button("Web", cte.GLOBE, "globe", True),
         tt.title("Proyectos"),
         lb.link_button("Mis Proyectos", rt.Routes.PROYECTOS.value, "folder-git-2", False),
+        # rx.cond(
+        #     len(featured) > 0,
+        #     rx.vstack(
+        #         title=("Destacado"),
+        #         rx.foreach(
+        #             featured,
+        #             lambda item: rx.grid(
+        #                 rx.link(
+        #                     rx.image(
+        #                         src=item["image"]
+        #                     ),
+        #                     rx.text(
+        #                         item["title"]
+        #                     ),
+        #                     href=item["url"],
+        #                     is_external= True
+        #                 )
+        #             )
+        #         )
+        #     )
+        # ),
         width="100%"
     )
