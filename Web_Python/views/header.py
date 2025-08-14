@@ -5,9 +5,10 @@ import Web_Python.components.info_text as it
 import Web_Python.constants as cte
 import Web_Python.styles.colors as color
 import Web_Python.components.link_button as lb
+from Web_Python.model.Live import Live
 
 
-def header(details = True, live = False, live_title = "") -> rx.Component:
+def header(details = True, live = Live(live=False, title="")) -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.avatar(
@@ -44,7 +45,7 @@ def header(details = True, live = False, live_title = "") -> rx.Component:
             ),
 
             rx.cond(
-                live,
+                live.live,
                 rx.link(
                     rx.flex(
                         rx.badge(
@@ -89,9 +90,9 @@ def header(details = True, live = False, live_title = "") -> rx.Component:
 
                 rx.flex(
                     rx.cond(
-                        live,
+                        live.live,
                         lb.link_button(
-                            live_title,
+                            live.title,
                             cte.TWITCH, 
                             "twitch",
                             True

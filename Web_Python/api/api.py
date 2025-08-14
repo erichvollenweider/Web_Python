@@ -1,18 +1,20 @@
 from .TwitchAPI import TwitchAPI
 from .SupabaseAPI import SupabaseAPI
-from fastapi.responses import JSONResponse
-from fastapi import Request
+from fastapi import FastAPI
+from Web_Python.model.Featured import Featured
+from Web_Python.model.Live import Live
 
+fastapi_app = FastAPI()
 
 TWITCH_API = TwitchAPI()
 SUPABASE_API = SupabaseAPI()
 
 
-async def live(request: Request):
-    user = request.path_params.get("user", "")
-    data = TWITCH_API.live(user)
-    return JSONResponse(content=data)
+@fastapi_app.get("/live/{user}")
+async def live(user: str) -> Live:
+    return TWITCH_API.live(user)
 
 
-async def featured() -> list:
+@fastapi_app.get("/featured")
+async def featured() -> list[Featured]:
     return SUPABASE_API.featured()

@@ -2,6 +2,7 @@ import os
 import time
 import dotenv
 import requests
+from Web_Python.model.Live import Live
 
 class TwitchAPI:
 
@@ -40,24 +41,21 @@ class TwitchAPI:
         return time.time() < self.token_expires
     
     
-    def live(self, user: str) -> dict:
+    def live(self, user: str) -> Live:
+
         if not self.token_valid():
             self.generate_token()
 
-        try:
-            response = requests.get(
-                f"https://api.twitch.tv/helix/streams?user_login={user}",
-                headers={
-                    "Client-ID": self.CLIENT_ID,
-                    "Authorization": f"Bearer {self.token}"
-                },
-                timeout=5
-            )
-            if response.status_code == 200:
-                data = response.json().get("data", [])
-                if data:
-                    return {"live": True, "title": data[0].get("title", "")}
-            return {"live": False, "title": ""}
-        except requests.RequestException as e:
-            print(f"Error al conectar con Twitch: {e}")
-            return {"live": False, "title": ""}
+        response = requests.get(
+            f"https://api.twitch.tv/helix/streams?user_login={user}",
+            headers={
+                "Client-ID": self.CLIENT_ID,
+                "Authorization": f"Bearer {self.token}"
+            }
+        )
+
+        if response.status_code == 200 and response.json()["data"]:
+            data = response.json()["data"]
+            return Live(live=True, title=data[0]["title"])
+
+        return Live(live=False, title="")

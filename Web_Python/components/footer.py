@@ -18,5 +18,6 @@ def footer() -> rx.Component:
         rx.text("Made with Reflex"),
         margin_bottom=styles.Size.DEFAULT.value,
         padding_bottom=styles.Size.DEFAULT.value,
+        padding_x="5px",
         color=colors.TextColor.FOOTER.value
     )

@@ -15,7 +15,7 @@ import Web_Python.state.PageState as ps
     title= utils.project_title,
     description= utils.project_description,
     image= utils.image,
-    on_load=ps.PageState.check_live
+    on_load=[ps.PageState.check_live, ps.PageState.featured_links]
 )
 
 
@@ -27,15 +27,15 @@ def projects() -> rx.Component:
             rx.vstack(
                 hd.header(
                     details=False,
-                    live=ps.PageState.is_live,
-                    live_title=ps.PageState.is_title
+                    live=ps.PageState.live_status
                 ),
-                prs.projects_links(),
                 pr.project(),
+                prs.projects_links(ps.PageState.featured_info),
                 max_width=styles.MAX_WIDTH,
                 width="100%",
                 spacing="8",
                 margin_y=styles.Size.MEDIUM.value,
+                padding_x="20px"
             ),
         ),
         rx.center(
