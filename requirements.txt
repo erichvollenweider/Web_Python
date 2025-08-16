@@ -4,3 +4,5 @@ uvicorn
 python-dotenv
 requests
 supabase
+configcat-client
+pytz

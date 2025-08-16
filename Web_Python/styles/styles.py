@@ -71,6 +71,13 @@ button_title_style = dict(
     color = text_color.HEADER.value
 )
 
+button_sub_title_style = dict(
+    font_family= Font.TITLE.value,
+    font_weight= FontWeight.MEDIUM.value,
+    font_size=Size.DEFAULT.value,
+    color = text_color.HEADER.value
+)
+
 button_body_style = dict(
     font_family= Font.DEFAULT.value,
     font_weight= FontWeight.LIGHT.value,

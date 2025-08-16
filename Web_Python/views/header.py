@@ -5,10 +5,11 @@ import Web_Python.components.info_text as it
 import Web_Python.constants as cte
 import Web_Python.styles.colors as color
 import Web_Python.components.link_button as lb
+import Web_Python.components.link_button_esp as lbe
 from Web_Python.model.Live import Live
 
 
-def header(details = True, live = Live(live=False, title="")) -> rx.Component:
+def header(details = True, live = Live(live=False, title=""), next_live = "") -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.avatar(
@@ -65,6 +66,17 @@ def header(details = True, live = Live(live=False, title="")) -> rx.Component:
                 )
             ),
             spacing="4"
+        ),
+
+        rx.cond(
+            ~ live.live,
+            lbe.link_button_esp(
+                "Clases",
+                next_live,
+                cte.TWITCH,
+                "laptop-minimal",
+                True
+            )
         ),
         
         rx.cond(

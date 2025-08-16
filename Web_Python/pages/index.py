@@ -25,7 +25,8 @@ def index() -> rx.Component:
             rx.vstack(
                 hd.header(
                     details=True,
-                    live=ps.PageState.live_status
+                    live=ps.PageState.live_status,
+                    next_live=ps.PageState.next_live
                 ),
                 lk.index_links(),
                 max_width=styles.MAX_WIDTH,
