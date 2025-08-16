@@ -5,7 +5,7 @@ from Web_Python.model.Featured import Featured
 from Web_Python.model.Live import Live
 
 
-USER = "polispol1"
+USER = "erich_vollenweider"
 class PageState(rx.State):
 
     live_status = Live(live=False, title="")
