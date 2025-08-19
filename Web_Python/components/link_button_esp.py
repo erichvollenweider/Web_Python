@@ -3,7 +3,7 @@ import Web_Python.styles.styles as styles
 
 
 
-def link_button_esp(title: str, sub_title: str, url: str, icono: str, is_ext: bool) -> rx.Component:
+def link_button_esp(title: str, sub_title: str, url: str, icono: str, is_ext: bool, animated=False) -> rx.Component:
     return rx.link(
         rx.button(
             rx.hstack(
@@ -26,5 +26,6 @@ def link_button_esp(title: str, sub_title: str, url: str, icono: str, is_ext: bo
         ),
         href=url,
         is_external=is_ext,
+        class_name=styles.BOUNCEIN_ANIMATION if animated else None,
         width="100%"
     )

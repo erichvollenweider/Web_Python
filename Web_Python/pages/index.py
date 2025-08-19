@@ -13,7 +13,7 @@ import Web_Python.state.PageState as ps
     title= utils.index_title,
     description= utils.index_description,
     image= utils.image,
-    on_load=[ps.PageState.check_live]
+    #on_load=[ps.PageState.check_live]
 )
 
 

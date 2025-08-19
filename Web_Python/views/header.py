@@ -6,6 +6,7 @@ import Web_Python.constants as cte
 import Web_Python.styles.colors as color
 import Web_Python.components.link_button as lb
 import Web_Python.components.link_button_esp as lbe
+import Web_Python.state.PageState as ps
 from Web_Python.model.Live import Live
 
 
@@ -65,20 +66,26 @@ def header(details = True, live = Live(live=False, title=""), next_live = "") ->
                     is_external=True
                 )
             ),
-            spacing="4"
+            spacing="4",
+            on_mount=ps.PageState.check_live
         ),
 
-        rx.cond(
-            ~ live.live,
-            lbe.link_button_esp(
-                "Clases",
-                next_live,
-                cte.TWITCH,
-                "laptop-minimal",
-                True
-            )
+        rx.box(
+            rx.cond(
+                (~live.live) & details,
+                lbe.link_button_esp(
+                    "Clases",
+                    next_live,
+                    cte.TWITCH,
+                    "laptop-minimal",
+                    is_ext=True,
+                    animated=True
+                )
+            ),
+            width="100%",
+            on_mount=ps.PageState.check_live
         ),
-        
+
         rx.cond(
             details,
             rx.vstack(
@@ -110,7 +117,8 @@ def header(details = True, live = Live(live=False, title=""), next_live = "") ->
                             True
                         ),
                     ),
-                    width="100%"
+                    width="100%",
+                    on_mount=ps.PageState.check_live
                 ),
                 
                 rx.text(
